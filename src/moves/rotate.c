@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rotate.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrito-s <cbrito-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:04:21 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/10 00:25:05 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:35:51 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-static void	rotate(t_stack **a)
+void	ft_ra(t_stack **a, int value)
 {
 	t_stack	*temp;
 	t_stack	*last;
@@ -20,30 +20,39 @@ static void	rotate(t_stack **a)
 	if (!*a || !(*a)->next)
 		return ;
 	temp = *a;
+	*a = (*a)->next;
+	temp->next = NULL;
 	last = *a;
 	while (last->next)
 		last = last->next;
-	*a = (*a)->next;
 	last->next = temp;
+	if (value == 1)
+		ft_printf("ra\n");
+	update_index(*a);
+}
+
+void	ft_rb(t_stack **b, int value)
+{
+	t_stack	*temp;
+	t_stack	*last;
+
+	if (!*b || !(*b)->next)
+		return ;
+	temp = *b;
+	*b = (*b)->next;
 	temp->next = NULL;
+	last = *b;
+	while (last->next)
+		last = last->next;
+	last->next = temp;
+	if (value == 1)
+		ft_printf("rb\n");
+	update_index(*b);
 }
 
-void	do_ra(t_stack **a)
+void	ft_rr(t_stack **a, t_stack **b)
 {
-	rotate(a);
-	ft_printf("ra\n");
-}
-
-void	do_rb(t_stack **b)
-{
-	rotate(b);
-	ft_printf("rb\n");
-}
-
-void	do_rr(t_stack **a, t_stack **b)
-{
-	rotate(a);
-	rotate(b);
+	ft_ra(a, 0);
+	ft_rb(b, 0);
 	ft_printf("rr\n");
 }
-

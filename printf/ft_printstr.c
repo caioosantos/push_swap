@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 15:06:50 by cbrito-s          #+#    #+#             */
-/*   Updated: 2024/11/25 17:05:33 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2024/12/03 16:04:15 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,8 @@ int	ft_printstr(char *s)
 
 	len = 0;
 	if (!s)
-		len += write(1, "(null)", 6);
-	else
-	{
-		while (*s)
-			len += ft_printchar(*s++);
-	}
+		return (ft_printstr("(null)"));
+	while (*s)
+		len += ft_printchar(*s++);
 	return (len);
 }

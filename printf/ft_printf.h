@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 13:50:56 by cbrito-s          #+#    #+#             */
-/*   Updated: 2024/11/26 15:59:38 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2024/12/04 13:48:22 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdarg.h>
 # include <unistd.h>
-# include <stdlib.h>
 
 # define HEX "0123456789abcdef"
 # define HEX_UPPER "0123456789ABCDEF"
@@ -29,6 +28,5 @@ int		ft_printhex_lower(unsigned int hex);
 int		ft_printhex_upper(unsigned int hex);
 int		ft_printptr(unsigned long num);
 int		ft_printf(const char *str, ...);
-int		printf_type(va_list args, char str);
 
 #endif

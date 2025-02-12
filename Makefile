@@ -1,53 +1,61 @@
 # Diretórios
-SRC_DIR = src
-INCLUDE_DIR = includes
-LIBFT_DIR = libft
-PRINTF_DIR = printf
+SRC_DIR = src/
+INCLUDE_DIR = includes/
+LIBFT_DIR = libft/
+PRINTF_DIR = printf/
+OBJ_DIR = obj/
 
-# Arquivos fonte
-SRCS =	$(wildcard $(SRC_DIR)/*.c) \
-		$(wildcard $(SRC_DIR)/utils/*.c) \
-		$(wildcard $(SRC_DIR)/moves/*.c) \
+# Coletar arquivos fonte de todos os subdiretórios
+SRC =	$(wildcard $(SRC_DIR)utils/*.c) \
+		$(wildcard $(SRC_DIR)moves/*.c) \
+		$(wildcard $(SRC_DIR)*.c)
 
-# Arquivos objeto
-OBJ = $(SRCS:.c=.o)
+# Criar lista de objetos dentro de obj/, mantendo subdiretórios
+OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 
 # Nome do executável
 NAME = push_swap
 
 # Flags de compilação
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(PRINTF_DIR)
+CFLAGS = -Wall -Wextra -Werror -g3 -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(PRINTF_DIR)
 
 # Bibliotecas
-LIBFT = $(LIBFT_DIR)/libft.a
-PRINTF = $(PRINTF_DIR)/libftprintf.a
+LIBFT = $(LIBFT_DIR)libft.a
+PRINTF = $(PRINTF_DIR)libftprintf.a
+
+# Criar diretórios dentro de obj/
+OBJ_DIRS = $(sort $(dir $(OBJ)))
 
 # Regras
 all: $(NAME)
+
+# Criar os diretórios para os arquivos objeto
+$(OBJ_DIRS):
+	@mkdir -p $@
+
+# Compilação dos arquivos .o, garantindo que os diretórios existam
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIRS)
+	$(CC) $(CFLAGS) -c $< -o $@
 
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf
 
 $(LIBFT):
-	make -C $(LIBFT_DIR)
+	$(MAKE) -C $(LIBFT_DIR)
 
 $(PRINTF):
-	make -C $(PRINTF_DIR)
-
-# Regra para gerar arquivos .o
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(MAKE) -C $(PRINTF_DIR)
 
 clean:
-	rm -f $(OBJ)
-	make clean -C $(LIBFT_DIR)
-	make clean -C $(PRINTF_DIR)
+	rm -rf $(OBJ_DIR)
+	$(MAKE) clean -C $(LIBFT_DIR)
+	$(MAKE) clean -C $(PRINTF_DIR)
 
 fclean: clean
 	rm -f $(NAME)
-	make fclean -C $(LIBFT_DIR)
-	make fclean -C $(PRINTF_DIR)
+	$(MAKE) fclean -C $(LIBFT_DIR)
+	$(MAKE) fclean -C $(PRINTF_DIR)
 
 re: fclean all
 

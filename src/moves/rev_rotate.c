@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   rev_rotate.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cbrito-s <cbrito-s@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 12:04:42 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/10 00:25:03 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/12 15:35:28 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "../includes/push_swap.h"
 
-static void	rev_rotate(t_stack **a)
+void	ft_rra(t_stack **a, int value)
 {
 	t_stack	*temp;
 	t_stack	*last;
@@ -20,31 +20,39 @@ static void	rev_rotate(t_stack **a)
 	if (!*a || !(*a)->next)
 		return ;
 	temp = *a;
-	last = *a;
-	while (last->next->next)
-		last = last->next;
-	*a = last->next;
-	last->next = NULL;
-	(*a)->next = temp;
+	while (temp->next->next)
+		temp = temp->next;
+	last = temp->next;
+	temp->next = NULL;
+	last->next = *a;
+	*a = last;
+	if (value == 1)
+		ft_printf("rra\n");
+	update_index(*a);
 }
 
-void	do_rra(t_stack **a)
+void	ft_rrb(t_stack **b, int value)
 {
-	rev_rotate(a);
-	ft_printf("rra\n");
+	t_stack	*temp;
+	t_stack	*last;
+
+	if (!*b || !(*b)->next)
+		return ;
+	temp = *b;
+	while (temp->next->next)
+		temp = temp->next;
+	last = temp->next;
+	temp->next = NULL;
+	last->next = *b;
+	*b = last;
+	if (value == 1)
+		ft_printf("rrb\n");
+	update_index(*b);
 }
 
-void	do_rrb(t_stack **b)
+void	ft_rrr(t_stack **a, t_stack **b)
 {
-	rev_rotate(b);
-	ft_printf("rrb\n");
-}
-
-void	do_rrr(t_stack **a, t_stack **b)
-{
-	rev_rotate(a);
-	rev_rotate(b);
+	ft_rra(a, 0);
+	ft_rrb(b, 0);
 	ft_printf("rrr\n");
 }
-
-
