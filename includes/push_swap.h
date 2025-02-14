@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:58:51 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/12 15:43:05 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/13 20:53:27 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	update_index(t_stack *stack);
 int		is_valid_int(char *str);
 int		check_dup(t_stack *stack, int val);
 int		ft_get_args(t_stack **a, int ac, char **av);
-void	free_arr(char **arr);
+int		free_arr(char **arr);
 
 // init_stack
 int		init_stack(t_stack **a, char **args);

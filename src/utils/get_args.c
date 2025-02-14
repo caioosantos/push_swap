@@ -6,13 +6,13 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:42 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/12 13:55:43 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/13 21:01:47 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/push_swap.h"
 
-void	free_arr(char **arr)
+int	free_arr(char **arr)
 {
 	int	i;
 
@@ -23,6 +23,7 @@ void	free_arr(char **arr)
 		i++;
 	}
 	free(arr);
+	return (0);
 }
 
 int	is_valid_int(char *str)
@@ -65,6 +66,17 @@ int	check_dup(t_stack *stack, int val)
 	return (1);
 }
 
+static int	is_empty_or_space(const char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ')
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	ft_get_args(t_stack **a, int ac, char **av)
 {
 	int		i;
@@ -82,14 +94,11 @@ int	ft_get_args(t_stack **a, int ac, char **av)
 		free(temp);
 		i++;
 	}
-	if (!args)
-		return (0);
+	if (!args || !*args || is_empty_or_space(args))
+		return (free(args), 0);
 	arr = ft_split(args, ' ');
 	free(args);
 	if (!init_stack(a, arr))
-	{
-		free_arr(arr);
-		return (0);
-	}
+		return (free_arr(arr));
 	return (1);
 }
