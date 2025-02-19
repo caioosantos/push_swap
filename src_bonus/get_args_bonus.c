@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_args.c                                         :+:      :+:    :+:   */
+/*   get_args_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 13:54:42 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/17 21:19:35 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:44:34 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
 int	free_arr(char **arr)
 {
@@ -57,6 +57,8 @@ int	is_valid_int(char *str)
 
 int	check_dup(t_stack *stack, int val)
 {
+	if (!stack)
+		return (1);
 	while (stack)
 	{
 		if (stack->value == val)

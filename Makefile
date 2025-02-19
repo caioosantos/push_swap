@@ -1,5 +1,6 @@
 # Diretórios
 SRC_DIR = src/
+SRC_BONUS_DIR = src_bonus/
 INCLUDE_DIR = includes/
 LIBFT_DIR = libft/
 PRINTF_DIR = printf/
@@ -10,11 +11,16 @@ SRC =	$(wildcard $(SRC_DIR)utils/*.c) \
 		$(wildcard $(SRC_DIR)moves/*.c) \
 		$(wildcard $(SRC_DIR)*.c)
 
+SRC_BONUS =	$(wildcard $(SRC_BONUS_DIR)moves/*.c) \
+			$(wildcard $(SRC_BONUS_DIR)*.c)
+
 # Criar lista de objetos dentro de obj/, mantendo subdiretórios
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
+OBJ_BONUS = $(patsubst $(SRC_BONUS_DIR)%.c, $(OBJ_DIR)%.o, $(SRC_BONUS))
 
 # Nome do executável
 NAME = push_swap
+BONUS_NAME = checker
 
 # Flags de compilação
 CC = gcc
@@ -25,7 +31,7 @@ LIBFT = $(LIBFT_DIR)libft.a
 PRINTF = $(PRINTF_DIR)libftprintf.a
 
 # Criar diretórios dentro de obj/
-OBJ_DIRS = $(sort $(dir $(OBJ)))
+OBJ_DIRS = $(sort $(dir $(OBJ) $(OBJ_BONUS)))
 
 # Regras
 all: $(NAME)
@@ -38,8 +44,16 @@ $(OBJ_DIRS):
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIRS)
 	$(CC) $(CFLAGS) -c $< -o $@
 
+$(OBJ_DIR)%.o: $(SRC_BONUS_DIR)%.c | $(OBJ_DIRS)
+	$(CC) $(CFLAGS) -c $< -o $@
+
 $(NAME): $(OBJ) $(LIBFT) $(PRINTF)
 	$(CC) $(CFLAGS) -o $@ $(OBJ) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf
+
+$(BONUS_NAME): $(OBJ_BONUS) $(LIBFT) $(PRINTF)
+	$(CC) $(CFLAGS) -o $@ $(OBJ_BONUS) -L$(LIBFT_DIR) -lft -L$(PRINTF_DIR) -lftprintf
+
+bonus: $(BONUS_NAME)
 
 $(LIBFT):
 	$(MAKE) -C $(LIBFT_DIR)
@@ -53,7 +67,7 @@ clean:
 	$(MAKE) clean -C $(PRINTF_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BONUS_NAME)
 	$(MAKE) fclean -C $(LIBFT_DIR)
 	$(MAKE) fclean -C $(PRINTF_DIR)
 

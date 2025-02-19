@@ -1,35 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strmapi.c                                       :+:      :+:    :+:   */
+/*   push_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 12:14:17 by cbrito-s          #+#    #+#             */
-/*   Updated: 2024/10/30 12:18:21 by cbrito-s         ###   ########.fr       */
+/*   Created: 2025/01/22 15:45:17 by cbrito-s          #+#    #+#             */
+/*   Updated: 2025/02/18 19:48:51 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../includes/checker.h"
 
-char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+void	ft_pa(t_stack **a, t_stack **b, int value)
 {
-	unsigned int	i;
-	unsigned int	len;
-	char			*str;
+	t_stack	*temp;
 
-	if (!s || !f)
-		return (NULL);
-	len = ft_strlen(s);
-	str = (char *)malloc((len + 1) * sizeof(char));
-	if (!str)
-		return (NULL);
-	i = 0;
-	while (i < len)
-	{
-		str[i] = f(i, s[i]);
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
+	if (!*b)
+		return ;
+	temp = *a;
+	*a = *b;
+	*b = (*b)->next;
+	(*a)->next = temp;
+	if (value == 1)
+		ft_printf("pa\n");
+}
+
+void	ft_pb(t_stack **a, t_stack **b, int value)
+{
+	t_stack	*temp;
+
+	if (!*a)
+		return ;
+	temp = *b;
+	*b = *a;
+	*a = (*a)->next;
+	(*b)->next = temp;
+	if (value == 1)
+		ft_printf("pb\n");
 }

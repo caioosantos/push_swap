@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
+/*   stack_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 18:24:22 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/17 21:23:42 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/18 19:46:21 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/push_swap.h"
+#include "../includes/checker.h"
 
 void	free_stack(t_stack **stack)
 {
@@ -24,7 +24,7 @@ void	free_stack(t_stack **stack)
 	}
 }
 
-static t_stack	*new_stack_node(int value, int index)
+static t_stack	*new_stack_node(int value)
 {
 	t_stack	*node;
 
@@ -32,10 +32,6 @@ static t_stack	*new_stack_node(int value, int index)
 	if (!node)
 		return (NULL);
 	node->value = value;
-	node->index = index;
-	node->cost = 0;
-	node->target_value = 0;
-	node->target_index = -1;
 	node->prev = NULL;
 	node->next = NULL;
 	return (node);
@@ -69,7 +65,7 @@ int	init_stack(t_stack **a, char **args)
 			return (0);
 		if (!check_dup(*a, ft_atoi(args[i])))
 			return (0);
-		new = new_stack_node(ft_atoi(args[i]), i);
+		new = new_stack_node(ft_atoi(args[i]));
 		if (!new)
 			return (0);
 		append_stack_node(a, new);
