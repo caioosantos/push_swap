@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 21:58:06 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/18 19:48:36 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:32:53 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "../libft/libft.h"
 # include "../printf/ft_printf.h"
 
-typedef struct	s_stack
+typedef struct s_stack
 {
 	int				value;
 	struct s_stack	*next;
@@ -25,16 +25,16 @@ typedef struct	s_stack
 }				t_stack;
 
 // moves
-void	ft_sa(t_stack **stack, int value);
-void	ft_sb(t_stack **stack, int value);
+void	ft_sa(t_stack **stack);
+void	ft_sb(t_stack **stack);
 void	ft_ss(t_stack **stack_a, t_stack **stack_b);
-void	ft_pa(t_stack **stack_a, t_stack **stack_b, int value);
-void	ft_pb(t_stack **stack_a, t_stack **stack_b, int value);
-void	ft_ra(t_stack **stack, int value);
-void	ft_rb(t_stack **stack, int value);
+void	ft_pa(t_stack **stack_a, t_stack **stack_b);
+void	ft_pb(t_stack **stack_a, t_stack **stack_b);
+void	ft_ra(t_stack **stack);
+void	ft_rb(t_stack **stack);
 void	ft_rr(t_stack **stack_a, t_stack **stack_b);
-void	ft_rra(t_stack **stack, int value);
-void	ft_rrb(t_stack **stack, int value);
+void	ft_rra(t_stack **stack);
+void	ft_rrb(t_stack **stack);
 void	ft_rrr(t_stack **a, t_stack **b);
 
 // get_args

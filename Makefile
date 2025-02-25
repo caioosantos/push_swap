@@ -1,4 +1,3 @@
-# Diretórios
 SRC_DIR = src/
 SRC_BONUS_DIR = src_bonus/
 INCLUDE_DIR = includes/
@@ -6,7 +5,6 @@ LIBFT_DIR = libft/
 PRINTF_DIR = printf/
 OBJ_DIR = obj/
 
-# Coletar arquivos fonte de todos os subdiretórios
 SRC =	$(wildcard $(SRC_DIR)utils/*.c) \
 		$(wildcard $(SRC_DIR)moves/*.c) \
 		$(wildcard $(SRC_DIR)*.c)
@@ -14,33 +12,25 @@ SRC =	$(wildcard $(SRC_DIR)utils/*.c) \
 SRC_BONUS =	$(wildcard $(SRC_BONUS_DIR)moves/*.c) \
 			$(wildcard $(SRC_BONUS_DIR)*.c)
 
-# Criar lista de objetos dentro de obj/, mantendo subdiretórios
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))
 OBJ_BONUS = $(patsubst $(SRC_BONUS_DIR)%.c, $(OBJ_DIR)%.o, $(SRC_BONUS))
 
-# Nome do executável
 NAME = push_swap
 BONUS_NAME = checker
 
-# Flags de compilação
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g3 -I$(INCLUDE_DIR) -I$(LIBFT_DIR) -I$(PRINTF_DIR)
 
-# Bibliotecas
 LIBFT = $(LIBFT_DIR)libft.a
 PRINTF = $(PRINTF_DIR)libftprintf.a
 
-# Criar diretórios dentro de obj/
 OBJ_DIRS = $(sort $(dir $(OBJ) $(OBJ_BONUS)))
 
-# Regras
 all: $(NAME)
 
-# Criar os diretórios para os arquivos objeto
 $(OBJ_DIRS):
 	@mkdir -p $@
 
-# Compilação dos arquivos .o, garantindo que os diretórios existam
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c | $(OBJ_DIRS)
 	$(CC) $(CFLAGS) -c $< -o $@
 

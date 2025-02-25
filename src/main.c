@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:07:16 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/17 21:23:48 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/24 20:59:54 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,19 +30,19 @@ void	lowest_to_top(t_stack **a)
 {
 	int		min_val;
 	int		min_index;
-	t_stack	*trav;
+	t_stack	*temp;
 
 	update_index(*a);
 	min_val = INT_MAX;
-	trav = *a;
-	while (trav)
+	temp = *a;
+	while (temp)
 	{
-		if (trav->value < min_val)
+		if (temp->value < min_val)
 		{
-			min_val = trav->value;
-			min_index = trav->index;
+			min_val = temp->value;
+			min_index = temp->index;
 		}
-		trav = trav->next;
+		temp = temp->next;
 	}
 	if (min_index <= (ft_stacksize(*a) - 1) / 2)
 		while ((*a)->value != min_val)
@@ -54,9 +54,12 @@ void	lowest_to_top(t_stack **a)
 
 void	ft_small_sort(t_stack **a)
 {
-	if (ft_stacksize(*a) == 2 && !is_sorted(*a))
+	int	size;
+
+	size = ft_stacksize(*a);
+	if (size == 2 && !is_sorted(*a))
 		ft_sa(a, 1);
-	else if (ft_stacksize(*a))
+	else if (size == 3)
 	{
 		if (is_sorted(*a))
 			return ;

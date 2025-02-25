@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/27 14:04:08 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/17 21:19:56 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/24 21:11:12 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	find_cheaper(t_stack *stack)
 	int	cost;
 	int	index;
 
+	if (!stack)
+		return (-1);
 	cost = stack->cost;
 	index = stack->index;
 	while (stack)
@@ -52,12 +54,14 @@ int	find_cheaper(t_stack *stack)
 
 int	calculate_steps(t_stack *stack, int index)
 {
+	int	size;
 	int	steps;
 
-	if (index <= (ft_stacksize(stack) - 1) / 2)
+	size = ft_stacksize(stack);
+	if (index <= (size - 1) / 2)
 		steps = index;
 	else
-		steps = ft_stacksize(stack) - index;
+		steps = size - index;
 	return (steps);
 }
 
