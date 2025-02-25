@@ -10,6 +10,7 @@ SRC =	$(wildcard $(SRC_DIR)utils/*.c) \
 		$(wildcard $(SRC_DIR)*.c)
 
 SRC_BONUS =	$(wildcard $(SRC_BONUS_DIR)moves/*.c) \
+			$(wildcard $(SRC_BONUS_DIR)utils/*.c) \
 			$(wildcard $(SRC_BONUS_DIR)*.c)
 
 OBJ = $(patsubst $(SRC_DIR)%.c, $(OBJ_DIR)%.o, $(SRC))

@@ -6,7 +6,7 @@
 /*   By: cbrito-s <cbrito-s>                        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 14:07:16 by cbrito-s          #+#    #+#             */
-/*   Updated: 2025/02/24 20:59:54 by cbrito-s         ###   ########.fr       */
+/*   Updated: 2025/02/25 11:41:35 by cbrito-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,8 +76,6 @@ static void	ft_big_sort(t_stack **a, t_stack **b)
 {
 	int	index;
 
-	if (ft_stacksize(*a) > 3 && !is_sorted(*a))
-		ft_pb(a, b, 1);
 	if (ft_stacksize(*a) > 3 && !is_sorted(*a))
 		ft_pb(a, b, 1);
 	while (ft_stacksize(*a) > 3 && !is_sorted(*a))
